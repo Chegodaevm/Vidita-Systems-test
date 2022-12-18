@@ -14,8 +14,8 @@ export interface TData {
 
 interface IDataSlice {
   documents: TData[];
-  activeCheckbox: null | number;
-  resultActiveBoxes: any;
+  activeCheckbox: null | string;
+  resultActiveBoxes: string[];
   findItem: number;
   choosenAllCheckboxes: boolean;
 }
@@ -57,9 +57,11 @@ export const fetchSlice = createSlice({
   reducers: {
     onClickSelectBox(state, action) {
       state.activeCheckbox = action.payload;
-      state.findItem = state.resultActiveBoxes.indexOf(state.activeCheckbox);
+      if (state.activeCheckbox !== null) {
+        state.findItem = state.resultActiveBoxes.indexOf(state.activeCheckbox);
+      }
 
-      if (state.findItem === -1) {
+      if (state.findItem === -1 && state.activeCheckbox !== null) {
         state.resultActiveBoxes.push(state.activeCheckbox);
       } else {
         state.resultActiveBoxes = state.resultActiveBoxes.slice(state.findItem + 1);

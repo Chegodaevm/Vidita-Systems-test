@@ -5,10 +5,10 @@ import s from './Popup.module.scss';
 
 type Props = {
   active: boolean;
-  setActive: any;
+  setActive: (arg: boolean) => void;
 };
 
-const Popup = ({ active, setActive }: Props) => {
+const Popup = ({ setActive }: Props) => {
   const { resultActiveBoxes, choosenAllCheckboxes, documents } = useAppSelector(
     (state) => state.fetchSlice,
   );
@@ -49,7 +49,7 @@ const Popup = ({ active, setActive }: Props) => {
         <ul>
           {arrayOfNamesActive.length > 0
             ? arrayOfNamesActive.map((arr, i) => <li key={i}>{arr}</li>)
-            : Names.map((arr: any, i: number) => <li key={i}>{arr}</li>)}
+            : Names.map((arr: string, i: number) => <li key={i}>{arr}</li>)}
         </ul>
         <div className={s.modal__buttons}>
           <Button onClick={() => setActive(false)}>Отменить</Button>
